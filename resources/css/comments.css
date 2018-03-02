@@ -1,0 +1,29 @@
+.comments-selection{
+    z-index: 25;
+    background-color: #e9ecef;
+    position: absolute;
+    top: 0px;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 200ms ease-in-out;
+  }
+   
+  .comments-section{
+    z-index: 30;
+    background-color: #e9ecef;
+    position: absolute;
+    top: 0px;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: left 200ms ease-in-out;
+  }
+   
+  .comments-option{
+    padding: 5%;
+    background-color: cadetblue;
+    margin: 5%;
+    font-size: 130%;
+    border-radius: 10px;
+  }

@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1,  shrink-to-fit=no, minimum-scale=1, maximum-scale=1, user-scalable=0">
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="resources/libs/bootstrap4/favicon.ico">
+
+  <title>Tránsito Mexicali</title>
+
+  <link href="resources/libs/bootstrap4/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="resources/css/offcanvas.css" rel="stylesheet">
+  <link href="resources/css/chat.css" rel="stylesheet">
+  <link href="resources/css/comments.css" rel="stylesheet">
+
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+    #map {
+      height: 100%;
+      z-index: 5;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+</head>
+
+<body class="bg-light">
+
+
+  <!-- nav list routes -->
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Tránsito Mexicali</a>
+
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+      <i class="fas fa-bus fa-lg"></i>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto list-group" id="ulRoutes"></ul>
+    </div>
+  </nav>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- center position button-->
+  <button id="btnCenterPosition" type="button" class="btn btn-info btn-center-position" style=" z-index: 6;">
+    <i class="fas fa-compass fa-2x"></i>
+  </button>
+
+  <!-- center menu button-->
+  <button id="btnCenterMenu" type="button" class="btn btn-info btn-circle" onclick="onClickCenterMenu(this)">
+    <i class="fas fa-bars fa-lg"></i>
+  </button>
+
+  <!-- menu div -->
+  <div id="idCenterMenu" class="center-menu">
+    <center>
+      <div class="container container-menu">
+        <div class="row">
+
+          <div class="col" style="padding: 5%;">
+            <div class="col-menu">
+              <i class="fas fa-user fa-2x" style="color: brown" onclick="onClickMenuOption('perfil');"></i>
+            </div>
+            <b>Perfil</b>
+          </div>
+
+          <div class="col" style="padding: 5%;">
+            <div class="col-menu">
+              <i class="fas fa-comment fa-2x" style="color: brown" onclick="onClickMenuOption('chat');"></i>
+            </div>
+            <b>Chat</b>
+          </div>
+
+          <div class="col" style="padding: 5%;">
+            <div class="col-menu">
+              <i class="fas fa-thumbs-up fa-2x" style="color: midnightblue" onclick="onClickMenuOption('comments');"></i>
+            </div>
+            <b>Comentarios</b>
+          </div>
+
+          <div class="col" style="padding: 5%;">
+            <div class="col-menu">
+              <i class="fas fa-cogs fa-2x" style="color: midnightblue"></i>
+            </div>
+            <b>Configuracion</b>
+          </div>
+
+        </div>
+      </div>
+    </center>
+  </div>
+
+
+
+  <!-- chat section -->
+  <div id="idChatSection" class="container chat-section">
+
+    <button type="button" onclick="onClickReturn('idChatSection');">
+      Regresar
+    </button>
+
+    <h1>Chat Rooms</h1>
+
+    <div class="form-group">
+      <label for="selChatRoute">Selecciona tu ruta:</label>
+      <select class="form-control" id="selChatRoute">
+        <option>Ruta 5</option>
+        <option>Ruta 9</option>
+        <option>Palaco</option>
+      </select>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col chat-room-option">
+        <center>
+          <i class="fas fa-bus" onclick="onClickMenuOption('chat');"></i>
+          <br/>
+          <kbd>
+            <b>#1989</b>
+          </kbd>
+
+          <p/>
+          <p/>
+
+          <i class="fas fa-user" onclick="onClickMenuOption('chat');"></i>
+          <br/>
+          <kbd>
+            <b>2</b>
+          </kbd>
+        </center>
+      </div>
+
+      <div class="col chat-room-option">
+        <center>
+          <i class="fas fa-bus" onclick="onClickMenuOption('chat');"></i>
+          <br/>
+          <kbd>
+            <b>#1989</b>
+          </kbd>
+
+          <p/>
+          <p/>
+
+          <i class="fas fa-user" onclick="onClickMenuOption('chat');"></i>
+          <br/>
+          <kbd>
+            <b>1</b>
+          </kbd>
+        </center>
+      </div>
+
+      <div class="col chat-room-option">
+        <center>
+          <i class="fas fa-bus"></i>
+          <br/>
+          <kbd>
+            <b>#1989</b>
+          </kbd>
+
+          <p/>
+          <p/>
+
+          <i class="fas fa-user"></i>
+          <br/>
+          <kbd>
+            <b>12</b>
+          </kbd>
+        </center>
+      </div>
+
+      <div class="col chat-room-option">
+        <center>
+          <i class="fas fa-bus"></i>
+          <br/>
+          <kbd>
+            <b>#1989</b>
+          </kbd>
+
+          <p/>
+          <p/>
+
+          <i class="fas fa-user"></i>
+          <br/>
+          <kbd>
+            <b>18</b>
+          </kbd>
+        </center>
+      </div>
+
+    </div>
+
+    <p>Use
+      <kbd>negrita</kbd> textno normal.
+    </p>
+
+    <div class="card message">
+      <div class="card-body">
+        Mensaje uno
+      </div>
+    </div>
+
+
+    <div class="card message">
+      <div class="card-body">
+        Mensaje dos
+      </div>
+    </div>
+
+    <div class="card message">
+      <div class="card-body">
+        Mensaje tres
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- comments section -->
+  <div id="idCommentSelection" class="container comments-selection">
+
+    <button type="button" onclick="onClickReturn('idCommentSelection');">
+      Regresar
+    </button>
+
+    <div class="row">
+
+      <div class="col comments-option" onclick="onClickOptionComment(1);">
+        <center>
+          <i class="fas fa-bus"></i>
+          <br/>
+          <kbd>
+            <b>Ruta 5</b>
+          </kbd>
+
+          <p/>
+          <p/>
+
+          <table>
+            <tr>
+              <td>
+                <i class="far fa-smile"></i>
+                <br/>
+                <b>2</b>
+              </td>
+              <td>
+                <i class="far fa-meh"></i>
+                <br/>
+                <b>5</b>
+              </td>
+              <td>
+                <i class="far fa-frown"></i>
+                <br/>
+                <b>8</b>
+              </td>
+            </tr>
+          </table>
+        </center>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="idCommentSection" class="container comments-section">
+
+    <button type="button" onclick="onClickReturn('idCommentSection');">
+      Regresar
+    </button>
+
+    <div class="row">
+
+      <div class="col comments-option">
+        <center>
+          <i class="fas fa-bus"></i>
+          <br/>
+          <kbd>
+            <b>Ruta 5</b>
+          </kbd>
+
+          <p/>
+          <p/>
+
+          <table>
+            <tr>
+              <td>
+                <i class="far fa-smile"></i>
+                <br/>
+                <b>2</b>
+              </td>
+              <td>
+                <i class="far fa-meh"></i>
+                <br/>
+                <b>5</b>
+              </td>
+              <td>
+                <i class="far fa-frown"></i>
+                <br/>
+                <b>8</b>
+              </td>
+            </tr>
+          </table>
+        </center>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- end commments section -->
+
+  <script>
+    var map = undefined;
+
+    function initMap() {
+      // WHERE (last_modification + 30) > NOW();
+
+      // Load map, center in mexicali
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: config.city.position.lat, lng: config.city.position.lng },
+        zoom: config.city.position.zoom,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        styles: [
+          { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+          { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+          { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
+          {
+            featureType: 'administrative.locality',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#d59563' }]
+          },
+          {
+            featureType: 'poi',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#d59563' }]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'geometry',
+            stylers: [{ color: '#263c3f' }]
+          },
+          {
+            featureType: 'poi.park',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#6b9a76' }]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [{ color: '#38414e' }]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry.stroke',
+            stylers: [{ color: '#212a37' }]
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#9ca5b3' }]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry',
+            stylers: [{ color: '#746855' }]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'geometry.stroke',
+            stylers: [{ color: '#1f2835' }]
+          },
+          {
+            featureType: 'road.highway',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#f3d19c' }]
+          },
+          {
+            featureType: 'transit',
+            elementType: 'geometry',
+            stylers: [{ color: '#2f3948' }]
+          },
+          {
+            featureType: 'transit.station',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#d59563' }]
+          },
+          {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: [{ color: '#17263c' }]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#515c6d' }]
+          },
+          {
+            featureType: 'water',
+            elementType: 'labels.text.stroke',
+            stylers: [{ color: '#17263c' }]
+          }
+        ]
+      });
+
+      // load the list routes in the menu
+      loadRoutesMenu();
+
+      // Load lines routes in map
+      loadRoutesMap();
+
+      // update the bus positions
+      getDataCoordinates();
+    }
+
+    function loadRoutesMenu() {
+
+      var menuRoutes = document.getElementById("ulRoutes");
+      for (var i = 0; i < config.route.length; i++) {
+
+        var li = document.createElement('li');
+        li.className = 'nav-item list-group-item';
+        li.id = config.route[i].routeId;
+
+        var iDisc = document.createElement('i');
+        iDisc.className = 'fas fa-circle fa-xs';
+        iDisc.style = "color :" + config.route[i].defaultColor;
+        li.appendChild(iDisc);
+
+        var iCheck = document.createElement('i');
+        iCheck.className = 'fas fa-check';
+        iCheck.style = 'display: none; float:right;';
+        li.appendChild(iCheck);
+
+        li.appendChild(document.createTextNode(' ' + config.route[i].name));
+
+        li.addEventListener('click', function (li) {
+          config.route.forEach(function (r) {
+            if (r.routeId == li.currentTarget.id) {
+              r.show = !r.show;
+
+              if (r.show) {
+                li.currentTarget.className = 'nav-item list-group-item active';
+                li.currentTarget.children[1].style = "display: visible; float:right;"
+              } else {
+                li.currentTarget.className = 'nav-item list-group-item';
+                li.currentTarget.children[1].style = "display: none; float:right;"
+              }
+            }
+          }, this);
+
+          loadRoutesMap();
+
+        }, false);
+
+        menuRoutes.appendChild(li);
+      }
+    }
+
+    function loadRoutesMap() {
+
+      config.route.forEach(function (route) {
+
+        if (!route.polyLine) {
+
+          route.polyLine = new google.maps.Polyline({
+            path: google.maps.geometry.encoding.decodePath(route.encodeLine),
+            geodesic: true,
+            strokeColor: route.defaultColor,
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+        }
+
+        if (route.show) {
+          route.polyLine.setMap(map);
+        } else {
+          route.polyLine.setMap(null);
+        }
+
+      }, this);
+    }
+
+    function getDataCoordinates() {
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+          var positions = JSON.parse(this.responseText);
+
+          // Iterate positiones from database and update bus list.
+          positions.forEach(function (position) {
+
+            var bus = config.bus.find(function (bus) {
+              return bus.busId == position.busId;
+            });
+
+            if (bus) {
+
+              if (!bus.marker) {
+
+                bus.marker = new google.maps.Marker({
+                  draggable: false,
+                  map: map,
+                  title: "Hello World!",
+                  position: {
+                    lat: position.lat,
+                    lng: position.lng
+                  },
+                });
+
+              }
+
+              bus.marker.setIcon({
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                strokeColor: 'red',
+                strokeWeight: 3,
+                scale: 6,
+                rotation: google.maps.geometry.spherical.computeHeading(
+                  bus.marker.getPosition(), {
+                    lat: function () {
+                      return position.lat;
+                    },
+                    lng: function () {
+                      return position.lng;
+                    }
+                  })
+              });
+
+              bus.marker.setPosition({
+                lat: position.lat,
+                lng: position.lng
+              });
+            }
+          }, this);
+
+
+        } else {
+          // contemplar archivo de errores.
+        }
+      };
+      xhttp.open("POST", "http://innopartserv.com/bus_tracker/server.php?api=getPositionByRoute", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send('[1]');
+
+      setTimeout("getDataCoordinates()", 10000);
+    }
+
+    // start menu section
+    function onClickCenterMenu(btn) {
+
+      var centerMenu = document.getElementById('idCenterMenu');
+
+      if (centerMenu.isMaximized) {
+        centerMenu.isMaximized = false;
+        centerMenu.className = "center-menu";
+        centerMenu.style.zIndex = 0;
+        centerMenu.style.opacity = 0;
+        btn.children[0].classList.toggle("fa-bars");
+      } else {
+        // menu is visible and send to front
+        centerMenu.isMaximized = true;
+        centerMenu.className = "center-menu center-menu-background";
+        centerMenu.style.zIndex = 7;
+        centerMenu.style.opacity = 1;
+        btn.children[0].classList.toggle("fa-times");
+      }
+    }
+
+    function onClickMenuOption(optMenu) {
+      switch (optMenu) {
+
+        case 'perfil':
+          console.log('perfil');
+          break;
+
+        case 'chat':
+          var chatSection = document.getElementById('idChatSection');
+          chatSection.style.left = '0px';
+          console.log('chat');
+          break;
+
+        case 'comments':
+          var commentSelection = document.getElementById('idCommentSelection');
+          commentSelection.style.left = '0px';
+          break;
+      }
+    }
+    // end menu section
+
+
+
+    // start chat section
+    function loadRoutesChat() {
+
+      var selRoutesChat = document.getElementById("selChatRoute");
+
+      for (var i = 0; i < config.route.length; i++) {
+
+        var opt = document.createElement('option');
+        //li.className = 'nav-item list-group-item';
+        opt.id = config.route[i].routeId;
+
+        //var iDisc = document.createElement('i');
+        //iDisc.className = 'fas fa-circle fa-xs';
+        //iDisc.style = "color :" + config.route[i].defaultColor;
+        //li.appendChild(iDisc);
+
+        //var iCheck = document.createElement('i');
+        //iCheck.className = 'fas fa-check';
+        //iCheck.style = 'display: none; float:right;';
+        //li.appendChild(iCheck);
+
+        opt.appendChild(document.createTextNode(' ' + config.route[i].name));
+
+        /*li.addEventListener('click', function (li) {
+          config.route.forEach(function (r) {
+            if (r.routeId == li.currentTarget.id) {
+              r.show = !r.show;
+
+              if (r.show) {
+                li.currentTarget.className = 'nav-item list-group-item active';
+                li.currentTarget.children[1].style = "display: visible; float:right;"
+              } else {
+                li.currentTarget.className = 'nav-item list-group-item';
+                li.currentTarget.children[1].style = "display: none; float:right;"
+              }
+            }
+          }, this);
+
+          loadRoutesMap();
+
+        }, false);*/
+
+        menuRoutes.appendChild(li);
+      }
+
+    }
+
+    function loadRooms(routeId) {
+
+    }
+
+    function onClickRoom(busId) {
+
+    }
+    // end chat section
+
+
+
+    // start comments section
+    function onClickOptionComment(idRoute) {
+
+      var commentSection = document.getElementById('idCommentSection');
+      commentSection.style.left = '0px';
+
+    }
+    // end comments section
+
+
+    function onClickReturn(elementId) {
+      var element = document.getElementById(elementId);
+      element.style.left = '-100%';
+    }
+
+    document.addEventListener("deviceready", function () {
+
+      document.getElementById("btnCenterPosition").addEventListener("click", function (event) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          map.setCenter(pos);
+
+        });
+      }, false);
+
+
+    }, false);
+  </script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhEYX1Y-N08KDaYrjoRBomOKjDNHln1VY&callback=initMap&libraries=geometry"></script>
+  <script defer src="resources/libs/fontawesome/js/fontawesome-all.js"></script>
+  <!-- config object for launch app -->
+  <script src="resources/js/config.js"></script>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script>
+    window.jQuery || document.write('<script src="resources/libs/bootstrap4/assets/js/vendor/jquery-slim.min.js"><\/script>')
+  </script>
+  <script src="resources/libs/bootstrap4/assets/js/vendor/popper.min.js"></script>
+  <script src="resources/libs/bootstrap4/dist/js/bootstrap.min.js"></script>
+  <script src="resources/libs/bootstrap4/assets/js/vendor/holder.min.js"></script>
+  <script src="resources/js/offcanvas.js"></script>
+
+</body>
+
+</html>
