@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 
 $api = $_GET["api"];
 
-// Lista productos total
+// update bus position (driver)
 if($api == "updatePosition"){
 
 	try {
@@ -23,7 +23,7 @@ if($api == "updatePosition"){
 		$sql = "UPDATE innopbbl_bus_tracker.coordinates SET"
 		. " lat = $request->lat, "
 		. " lng = $request->lng "
-		. " WHERE id_bus=$request->idBus;";
+		. " WHERE busId=$request->idBus;";
 		
 		if ($conn->query($sql) === TRUE) {
 			echo "Record updated successfully";
@@ -38,7 +38,7 @@ if($api == "updatePosition"){
 }
 
 
-// Lista productos total
+// get bus positions (user)
 if($api == "getPositionByRoute"){
 
 	try {
@@ -46,7 +46,7 @@ if($api == "getPositionByRoute"){
 		$postdata = file_get_contents("php://input");
 		$request = substr($postdata, 1, -1);  // remove the firts and last character.
 	
-		$sql = "SELECT * FROM innopbbl_bus_tracker.coordinates WHERE id_bus IN ($request);";
+		$sql = "SELECT * FROM innopbbl_bus_tracker.coordinates WHERE busId IN ($request);";
 
 		$result_json = "[";
 		$result = $conn->query($sql);
@@ -54,7 +54,7 @@ if($api == "getPositionByRoute"){
 
 			while($row = $result->fetch_assoc()) {
 
-				$result_json = $result_json."{\"id_bus\":".$row["id_bus"].",\"lat\":".$row["lat"].",\"lng\":".$row["lng"]."},";
+				$result_json = $result_json."{\"busId\":".$row["busId"].",\"routeId\":".$row["routeId"].",\"lat\":".$row["lat"].",\"lng\":".$row["lng"]."},";
 			}
 
 			$result_json = substr($result_json, 0, -1)."]";
@@ -79,7 +79,7 @@ function output($data)
 	$fichero = 'output.txt';
 	// Abre el fichero para obtener el contenido existente
 	$actual = file_get_contents($fichero);
-	// Añade una nueva persona al fichero
+	// A単ade una nueva persona al fichero
 	$actual .= $data;
 	// Escribe el contenido al fichero
 	file_put_contents($fichero, $actual);
