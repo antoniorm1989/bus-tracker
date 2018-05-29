@@ -10,7 +10,7 @@
 
   <!-- Bootstrap template -->
   <link href="libs/bootstrap4/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+
   <!-- Custom styles for this template -->
   <link href="css/chat.css" rel="stylesheet">
   <link href="css/comments.css" rel="stylesheet">
@@ -320,11 +320,8 @@
 
   </div>
 
- 
-  <script src="js/index.js"></script>
 
   <script>
-    app.initialize();
 
     var map = undefined;
 
@@ -699,7 +696,8 @@
       element.style.left = '-100%';
     }
 
-    /*document.addEventListener("deviceready", function () {
+    // Device events
+    document.addEventListener("deviceready", function () {
 
       document.getElementById("btnCenterPosition").addEventListener("click", function (event) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -713,7 +711,8 @@
         });
       }, false);
 
-    }, false);*/
+    }, false);
+
   </script>
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhEYX1Y-N08KDaYrjoRBomOKjDNHln1VY&callback=initMap&libraries=geometry"></script>
@@ -735,7 +734,7 @@
   <!-- config object for launch app -->
   <script src="js/config.js"></script>
   <script src="js/offcanvas.js"></script>
-  
+
 </body>
 
 </html>
